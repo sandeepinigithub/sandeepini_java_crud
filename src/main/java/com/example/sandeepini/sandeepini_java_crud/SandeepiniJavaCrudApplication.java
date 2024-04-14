@@ -18,9 +18,14 @@ public class SandeepiniJavaCrudApplication {
 	}
 
 	@GetMapping(value = "/userDetail", produces = "application/json")
-	public UserData userDetail() {
-		UserData data = new UserData(1, "Sandeep Kumar Shukla", "Shekhar");
-		return data;
+	public ResponseFormat userDetail() {
+		UserData[] data = new UserData[3];
+		data[0] = new UserData(1, "Sandeep Kumar Shukla", "Shekhar");
+		data[1] = new UserData(2, "Sandeep Kumar Shukla", "Shekhar");
+		data[2] = new UserData(3, "Sandeep Kumar Shukla", "Shekhar");
+		
+		ResponseFormat response = new ResponseFormat(data);
+		return response;
 	}
 }
 
@@ -36,5 +41,21 @@ class UserData {
 		this.name = name;
 		this.friend = friend;
 
+	}
+}
+
+//Model Class for response Writing Here 
+class ResponseFormat {
+	public int code;
+	public String message;
+	public int status;
+	public UserData[] data;
+
+//	Constructor Function 
+	ResponseFormat(UserData[] users) {
+		this.code = 200;
+		this.message = "Successful";
+		this.status = 1;
+		this.data = users;		
 	}
 }
